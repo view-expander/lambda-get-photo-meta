@@ -1,12 +1,19 @@
 import { handler } from '../src'
 
 describe('handler()', () => {
-  it('returns dummy response', async () => {
+  beforeEach(() => {
+    process.env.IMGIX_DOMAIN = undefined
+  })
+
+  it('will be succeed', async () => {
     expect.assertions(1)
 
-    return expect(handler()).resolves.toEqual({
-      statusCode: 200,
-      body: JSON.stringify({}),
-    })
+    process.env.IMGIX_DOMAIN = 'subdomain.imgix.net'
+
+    return expect(
+      handler({
+        pathParameters: { key: 'image.png' },
+      } as any)
+    ).resolves.toMatchSnapshot()
   })
 })
