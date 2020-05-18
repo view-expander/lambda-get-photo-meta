@@ -18,7 +18,7 @@ export async function handler(
 
     const { key } = event.pathParameters
     const client = new ImgixClient({ domain: process.env.IMGIX_DOMAIN })
-    const url = client.buildURL(key, { fm: 'json' })
+    const url = client.buildURL(`source/${key}`, { fm: 'json' })
 
     return {
       statusCode: 301,
