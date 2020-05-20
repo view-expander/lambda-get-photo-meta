@@ -23,6 +23,8 @@ export async function handler(
     return {
       statusCode: 301,
       headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
         Location: url,
       },
       body: JSON.stringify({ path: url }),
